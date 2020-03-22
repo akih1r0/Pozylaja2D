@@ -40,4 +40,5 @@ public class Control : MonoBehaviour
             pl2.MovePosition(pl2.position + Vector2.down * speed * Time.deltaTime);
         }
     }
+
 }
