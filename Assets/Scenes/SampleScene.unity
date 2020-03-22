@@ -161,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 2015593495}
   player2: {fileID: 2044349585}
-  speed: 20
+  speed: 15
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
