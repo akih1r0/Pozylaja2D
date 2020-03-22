@@ -6,36 +6,45 @@ using UnityEngine;
 public class BallFisics : MonoBehaviour
 {
     private byte BallVector;
-    private Rigidbody2D BallBody;
+   
     public float speed = 20f;
-    private Vector2 suka;
+    private ConstantForce2D suka;
+    
     // Start is called before the first frame update
     void Start()
     {
-        BallBody = GetComponent<Rigidbody2D>();
+        
+        suka = GetComponent<ConstantForce2D>();
         BallVector = (byte) Random.Range(0, 1);
         if(BallVector == 1)
         {
-            suka = Vector2.right;
+            suka.force = new Vector2(9.8F, 0);
         }
 
         else
         {
-            suka = Vector2.left;
+            suka.force = new Vector2(-9.8F, 0);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        BallBody.MovePosition(BallBody.position + suka * speed * Time.deltaTime);
+      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (suka == Vector2.right)
-            suka = Vector2.left;
+        if (BallVector == 1)
+        {
+
+            BallVector = 0;
+            suka.force = new Vector2(-9.8F, 0);
+        }
         else
-            suka = Vector2.right;
+        {
+            suka.force = new Vector2(9.8F, 0);
+            BallVector = 1;
+        }
     }
 }
