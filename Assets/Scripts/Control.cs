@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Control : MonoBehaviour
 {
+    Vector2 ballDirection;
+    Vector2 respawn = new Vector2(0, 0);
+    public GameObject ball;
     public GameObject player1;
     public GameObject player2;
     private KeyCode upBut1 = KeyCode.W;
@@ -16,6 +19,7 @@ public class Control : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        FirstBall();
         pl1 = player1.GetComponent<Rigidbody2D>();
         pl2 = player2.GetComponent<Rigidbody2D>();
     }
@@ -41,4 +45,10 @@ public class Control : MonoBehaviour
         }
     }
 
+
+    void FirstBall()
+    {
+        GameObject projectileObject = Instantiate(ball, respawn, Quaternion.identity);
+        BallFisics ballFisics = ball.GetComponent<BallFisics>();
+    }
 }

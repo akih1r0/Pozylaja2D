@@ -5,46 +5,41 @@ using UnityEngine;
 
 public class BallFisics : MonoBehaviour
 {
-    private byte BallVector;
-   
-    public float speed = 20f;
-    private ConstantForce2D suka;
+    Rigidbody2D ballBody;
+    private Vector2 ballDirection;
+    
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        ballBody = GetComponent<Rigidbody2D>();
+        ballBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        ballDirection = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        ballDirection.Normalize();
         
-        suka = GetComponent<ConstantForce2D>();
-        BallVector = (byte) Random.Range(0, 1);
-        if(BallVector == 1)
-        {
-            suka.force = new Vector2(9.8F, 0);
-        }
-
-        else
-        {
-            suka.force = new Vector2(-9.8F, 0);
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+        ballBody.position += ballDirection;
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (BallVector == 1)
-        {
+        
 
-            BallVector = 0;
-            suka.force = new Vector2(-9.8F, 0);
+        if(collision.gameObject.tag == "Player")
+        {
+            Debug.Log("Бодя Пидарас");
+            ballDirection.x = -ballDirection.x;
         }
         else
         {
-            suka.force = new Vector2(9.8F, 0);
-            BallVector = 1;
+            Debug.Log("Бодя Лох");
+            ballDirection.y = -ballDirection.y;
         }
+
     }
 }

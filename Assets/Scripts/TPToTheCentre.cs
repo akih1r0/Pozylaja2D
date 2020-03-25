@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class TPToTheCentre : MonoBehaviour
 {
-    public GameObject respawn;
-    private void OnTriggerEnter2D(Collider2D collision)
+    Vector2 ballDirection;
+    Vector2 respawn = new Vector2(0,0);
+    public GameObject ball;
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(collision.tag == "Ball")
+        BallFisics controller = other.GetComponent<BallFisics>();
+        // Debug.Log("Object that entered the trigger: " + other);
+        if (controller != null)
         {
-            collision.transform.position = respawn.transform.position;
+            Destroy(controller.gameObject);
+            GameObject projectileObject = Instantiate(ball, respawn , Quaternion.identity);
+            BallFisics ballFisics = ball.GetComponent<BallFisics>();
         }
     }
 }
