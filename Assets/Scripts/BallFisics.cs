@@ -6,7 +6,7 @@ using UnityEngine;
 public class BallFisics : MonoBehaviour
 {
     private byte BallVector;
-   
+    Rigidbody2D rbBall;
     public float speed = 20f;
     private ConstantForce2D suka;
     
@@ -15,6 +15,8 @@ public class BallFisics : MonoBehaviour
     {
         
         suka = GetComponent<ConstantForce2D>();
+
+        rbBall = GetComponent<Rigidbody2D>();
         BallVector = (byte) Random.Range(0, 1);
         if(BallVector == 1)
         {
